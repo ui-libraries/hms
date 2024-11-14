@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMS API Test</title>
+</head>
+<body>
+  <h1>HMS API Test</h1>
+  <div>
+    <button id="getSiteInfo">Get Site Info</button>
+    <button id="getItems">Get Items</button>
+    <div id="output" style="margin-top: 20px; white-space: pre-wrap; background: #f4f4f4; padding: 10px; border: 1px solid #ccc;"></div>
+  </div>
+
+  <script type="module">
+    import API from './hms.js';
+
+    const apiEndpoint = 'https://morrisarchive.lib.uiowa.edu/api/';
+    const outputDiv = document.getElementById('output');
+
+    document.getElementById('getSiteInfo').addEventListener('click', async () => {
+      outputDiv.textContent = 'Fetching site info...';
+      const data = await API.getSiteInfo(apiEndpoint);
+      outputDiv.textContent = JSON.stringify(data, null, 2);
+    });
+
+    document.getElementById('getItems').addEventListener('click', async () => {
+      outputDiv.textContent = 'Fetching items...';
+      const data = await API.getItems(apiEndpoint);
+      outputDiv.textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>
